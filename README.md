@@ -98,15 +98,39 @@ Input data is **not included**. Place files in `data/` (notebooks) or next to th
 
 ## Results
 
-| Metric | Value |
+### Existing IEEE 14-bus condition, base case
+
+| Quantity | Active power | Reactive power |
+|---|---|---|
+| Losses before DG | 25.3580 MW | 84.5010 MVAR |
+
+### Scenario 1, maxiter 100, DG at buses 7, 8, 11, 14
+
+| Measure | Value |
 |---|---|
-| Test system | IEEE 14-bus |
-| Scenario 1 active-power loss reduction | 98.15% |
-| Scenario 1 reactive-power loss reduction | 98.95% |
-| Scenario 1 average voltage rise | 0.0127 p.u. |
-| Scenario 2 average voltage rise | 0.0064 p.u. |
-| Voltage band | 0.90-1.05 p.u. |
-| Pack size / leaders | 100 wolves, $\alpha$-$\beta$-$\delta$ |
+| DG size at bus 7 | 224.13 kW |
+| DG size at bus 8 | 468.61 kW |
+| DG size at bus 11 | 360.23 kW |
+| DG size at bus 14 | 205.39 kW |
+| Losses after DG | 0.4700 MW / 0.8840 MVAR |
+| Active loss reduction | 98.1465% |
+| Reactive loss reduction | 98.9538% |
+| Average voltage change | +0.0127 p.u. |
+| Lowest bus voltage | 0.9693 p.u. at bus 12 |
+
+### Scenario 2, maxiter 50, DG at buses 1, 2, 8, 14
+
+| Measure | Value |
+|---|---|
+| DG size at bus 1 | 152.23 kW |
+| DG size at bus 2 | 293.88 kW |
+| DG size at bus 8 | 648.63 kW |
+| DG size at bus 14 | 174.18 kW |
+| Losses after DG | 1.3250 MW / 2.6520 MVAR |
+| Active loss reduction | 94.7748% |
+| Reactive loss reduction | 96.8616% |
+| Average voltage change | +0.0064 p.u. |
+| Lowest bus voltage | 0.9242 p.u. at bus 14 |
 
 
 ## Requirements
