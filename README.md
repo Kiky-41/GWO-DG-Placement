@@ -36,3 +36,11 @@ Python. Python notebooks: `numpy`, `pandas`, `scipy`, `matplotlib` (as imported)
 ```bibtex
 @article{Wijaya_2025, title={Multi-Objective in Mapping the Optimal Distributed Generation Configuration through GWOA to Enhance Grid Performance Reliability}, volume={21}, ISSN={1412-4785}, url={http://dx.doi.org/10.17529/jre.v21i3.42929}, DOI={10.17529/jre.v21i3.42929}, number={3}, journal={Jurnal Rekayasa Elektrika}, publisher={Jurnal Rekayasa Elektrika (JRE)}, author={Wijaya, I Gede Putu Oka Indra and Ikhsan, Rifki Rahman Nur and Yustika, Lindiasari Martha and Raharjo, Jangkung}, year={2025}, month=Sept }
 ```
+
+## License
+
+[![CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](LICENSE)
+
+Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). **Attribution is required**: any use of this code, results, or figures, including in publications, must cite:
+
+> I Gede Putu Oka Indra Wijaya; Rifki Rahman Nur Ikhsan; Lindiasari Martha Yustika; Jangkung Raharjo (2025). Multi-Objective in Mapping the Optimal Distributed Generation Configuration through GWOA to Enhance Grid Performance Reliability. *Jurnal Rekayasa Elektrika*. https://doi.org/10.17529/jre.v21i3.42929

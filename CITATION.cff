@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this code or results, you must cite the paper below (CC BY 4.0 attribution requirement)."
+title: "GWO-DG-Placement: Multi-Objective in Mapping the Optimal Distributed Generation Configuration through GWOA to Enhance Grid Performance Reliability"
+type: software
+license: CC-BY-4.0
+repository-code: "https://github.com/Kiky-41/GWO-DG-Placement"
+authors:
+  - family-names: "Wijaya"
+    given-names: "I Gede Putu Oka Indra"
+  - family-names: "Ikhsan"
+    given-names: "Rifki Rahman Nur"
+  - family-names: "Yustika"
+    given-names: "Lindiasari Martha"
+  - family-names: "Raharjo"
+    given-names: "Jangkung"
+preferred-citation:
+  type: article
+  title: "Multi-Objective in Mapping the Optimal Distributed Generation Configuration through GWOA to Enhance Grid Performance Reliability"
+  authors:
+    - family-names: "Wijaya"
+      given-names: "I Gede Putu Oka Indra"
+    - family-names: "Ikhsan"
+      given-names: "Rifki Rahman Nur"
+    - family-names: "Yustika"
+      given-names: "Lindiasari Martha"
+    - family-names: "Raharjo"
+      given-names: "Jangkung"
+  journal: "Jurnal Rekayasa Elektrika"
+  year: 2025
+  doi: 10.17529/jre.v21i3.42929
