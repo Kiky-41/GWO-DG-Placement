@@ -13,6 +13,7 @@ Grey Wolf Optimizer for multi-objective distributed generation placement on the 
 In electric power distribution systems, the distance between the load bus and the generating unit significantly affects grid efficiency and reliability, with longer distances causing greater voltage drops. To mitigate this, Distributed Generation (DG) is increasingly being used, generating electricity closer to the point of consumption. Determining the optimal DG location requires advanced metaheuristic methods. This research proposes the Grey Wolf Optimizer Algorithm (GWOA) to determine optimal DG placement, tested on the IEEE 14-bus distribution grid. The method generated two scenarios: In the first scenario, power losses were reduced by 98.1465% for real power and 98.9538% for reactive power compared to the existing conditions, while voltage increased by an average of 0.0127 p.u. for all buses combined. The second scenario also showed a notable voltage increase of 0.0064 p.u. The GWOA method proves to be an efficient and effective solution for DG placement, enhancing system reliability and protecting household electronic devices.
 
 
+
 ## Proposed method
 
 Grey Wolf Optimizer (GWO) searches for the bus and capacity of one distributed generator on the IEEE 14-bus network. Each wolf encodes a candidate placement; the pack is led by the three best placements ($\alpha$, $\beta$, $\delta$), and the objective is network loss subject to the grid-code voltage band. The paper reports two scenarios, with loss reductions of 98.15% (real) and 98.95% (reactive) in the first.
@@ -76,6 +77,8 @@ Averaging the three candidate moves keeps the pack near the best-known region wh
 ### Implementation note
 
 The notebook evaluates a simplified loss proxy: line impedance is formed from resistance, reactance and susceptance, current is estimated with a flat $V=1.0$ p.u. assumption, and only the top three DG buses are kept. Voltage is not part of the notebook fitness, although the paper enforces the 0.90–1.05 p.u. band and reports voltage improvements. The load-flow results in the paper therefore come from the paper workflow, not from this notebook.
+### Reported result
+Scenario 1 places one DG and cuts active-power losses by 98.15% and reactive-power losses by 98.95%, with an average voltage rise of 0.0127 p.u.; scenario 2 raises the average voltage by 0.0064 p.u. Both scenarios stay inside the 0.90-1.05 p.u. band.
 
 ## Contents
 
@@ -91,6 +94,7 @@ Input data is **not included**. Place files in `data/` (notebooks) or next to th
 | File | Columns |
 |---|---|
 | `dg14bus.xlsx` | (format: see code) |
+
 
 ## Requirements
 
