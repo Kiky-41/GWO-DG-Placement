@@ -30,21 +30,15 @@ $$0.90\le V_i\le1.05~\text{p.u.},\qquad P_{DG}\le0.20~P_{\text{peak}},\qquad P_{
 
 ### Notation
 
-| Symbol | Meaning | Unit |
-|---|---|---|
-| $N$ | number of buses | – |
-| $N_l$ | number of branches | – |
-| $V_i,\theta_i$ | voltage magnitude and angle at bus $i$ | p.u., rad |
-| $G_{ij}$ | real part of the bus admittance matrix | p.u. |
-| $I_k,R_k$ | current and resistance of branch $k$ | p.u., p.u. |
-| $P_{\text{loss}}$ | total active-power loss | MW |
-| $P_{DG}$ | DG capacity | MW |
-| $P_{\text{peak}}$ | peak system demand | MW |
-| $\mathbf{X}$ | wolf position (bus and capacity) | – |
-| $\mathbf{X}_\alpha,\mathbf{X}_\beta,\mathbf{X}_\delta$ | three best positions | – |
-| $\mathbf{A},\mathbf{C}$ | GWO coefficient vectors | – |
-| $a$ | encircling parameter, decreases from 2 to 0 | – |
-| $t,T$ | iteration and iteration cap | – |
+| Symbol | Meaning | Symbol | Meaning |
+|---|---|---|---|
+| $N$ | number of buses | $P_{\text{peak}}$ | peak system demand (MW) |
+| $N_l$ | number of branches | $\mathbf{X}$ | wolf position (bus and capacity) |
+| $V_i,\theta_i$ | voltage magnitude and angle at bus $i$ (p.u., rad) | $\mathbf{X}_\alpha,\mathbf{X}_\beta,\mathbf{X}_\delta$ | three best positions |
+| $G_{ij}$ | real part of the bus admittance matrix (p.u.) | $\mathbf{A},\mathbf{C}$ | GWO coefficient vectors |
+| $I_k,R_k$ | current and resistance of branch $k$ (p.u., p.u.) | $a$ | encircling parameter, decreases from 2 to 0 |
+| $P_{\text{loss}}$ | total active-power loss (MW) | $t,T$ | iteration and iteration cap |
+| $P_{DG}$ | DG capacity (MW) |  |  |
 
 ### GWO equations
 
