@@ -104,6 +104,8 @@ Input data is **not included**. Place files in `data/` (notebooks) or next to th
 |---|---|---|
 | Losses before DG | 25.3580 MW | 84.5010 MVAR |
 
+Base losses are 25.3580 MW and 84.5010 MVAR, with bus 14 at 0.9151 p.u. and buses 12 and 13 below 0.95 p.u. These three buses drive the placement problem: without DG the feeder sits at the edge of the 0.90 p.u. limit.
+
 ### Scenario 1, maxiter 100, DG at buses 7, 8, 11, 14
 
 | Measure | Value |
@@ -118,6 +120,8 @@ Input data is **not included**. Place files in `data/` (notebooks) or next to th
 | Average voltage change | +0.0127 p.u. |
 | Lowest bus voltage | 0.9693 p.u. at bus 12 |
 
+Four units totalling 1,258.36 kW cut active loss to 0.4700 MW and reactive loss to 0.8840 MVAR, removing 98.1465% and 98.9538%. Every bus ends at or above 0.9693 p.u. and the average voltage rises 0.0127 p.u., so the configuration satisfies the objective on both counts.
+
 ### Scenario 2, maxiter 50, DG at buses 1, 2, 8, 14
 
 | Measure | Value |
@@ -131,6 +135,8 @@ Input data is **not included**. Place files in `data/` (notebooks) or next to th
 | Reactive loss reduction | 96.8616% |
 | Average voltage change | +0.0064 p.u. |
 | Lowest bus voltage | 0.9242 p.u. at bus 14 |
+
+The second mapping removes 94.7748% of active and 96.8616% of reactive loss and lifts average voltage 0.0064 p.u. Bus 14 stays the weak point at 0.9242 p.u., which is why the paper ranks this configuration below scenario 1 even though it meets the grid code.
 
 
 ## Requirements
