@@ -96,6 +96,19 @@ Input data is **not included**. Place files in `data/` (notebooks) or next to th
 | `dg14bus.xlsx` | (format: see code) |
 
 
+## Results
+
+| Metric | Value |
+|---|---|
+| Test system | IEEE 14-bus |
+| Scenario 1 active-power loss reduction | 98.15% |
+| Scenario 1 reactive-power loss reduction | 98.95% |
+| Scenario 1 average voltage rise | 0.0127 p.u. |
+| Scenario 2 average voltage rise | 0.0064 p.u. |
+| Voltage band | 0.90-1.05 p.u. |
+| Pack size / leaders | 100 wolves, $\alpha$-$\beta$-$\delta$ |
+
+
 ## Requirements
 
 Python. Python notebooks: `numpy`, `pandas`, `scipy`, `matplotlib` (as imported). MATLAB scripts: R2021a+.
