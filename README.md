@@ -12,6 +12,49 @@ Grey Wolf Optimizer for multi-objective distributed generation placement on the 
 
 In electric power distribution systems, the distance between the load bus and the generating unit significantly affects grid efficiency and reliability, with longer distances causing greater voltage drops. To mitigate this, Distributed Generation (DG) is increasingly being used, generating electricity closer to the point of consumption. Determining the optimal DG location requires advanced metaheuristic methods. This research proposes the Grey Wolf Optimizer Algorithm (GWOA) to determine optimal DG placement, tested on the IEEE 14-bus distribution grid. The method generated two scenarios: In the first scenario, power losses were reduced by 98.1465% for real power and 98.9538% for reactive power compared to the existing conditions, while voltage increased by an average of 0.0127 p.u. for all buses combined. The second scenario also showed a notable voltage increase of 0.0064 p.u. The GWOA method proves to be an efficient and effective solution for DG placement, enhancing system reliability and protecting household electronic devices.
 
+
+## Proposed method
+
+Grey Wolf Optimizer (GWO) searches for the bus and capacity of one distributed generator on the IEEE 14-bus network. Each wolf encodes a candidate placement; the pack is led by the three best placements ($\alpha$, $\beta$, $\delta$), and the objective is network loss subject to the grid-code voltage band.
+
+### Problem formulation
+
+$$\min_{\text{bus},\,P_{DG}}\ P_{\text{loss}}=\sum_{k=1}^{N_l}I_k^2R_k=\sum_{i=1}^{N}\sum_{j=1}^{N}G_{ij}\left(V_i^2+V_j^2-2V_iV_j\cos(\theta_i-\theta_j)\right)$$
+
+subject to
+
+$$0.90\le V_i\le1.05\ \text{p.u.},\qquad P_{DG}\le0.20\,P_{\text{peak}},\qquad P_{DG}^{\min}\le P_{DG}\le P_{DG}^{\max}$$
+
+Voltage violations are penalised, so the implemented fitness is
+
+$$f=\sum_kI_k^2R_k+M\sum_{i=1}^{N}\left[\max(0,V_i^{\min}-V_i)+\max(0,V_i-V_i^{\max})\right]^2$$
+
+### GWO equations
+
+Encircling:
+
+$$\mathbf{D}=\left|\mathbf{C}\odot\mathbf{X}_p(t)-\mathbf{X}(t)\right|,\qquad \mathbf{X}(t+1)=\mathbf{X}_p(t)-\mathbf{A}\odot\mathbf{D}$$
+
+$$\mathbf{A}=2a\mathbf{r}_1-a,\qquad \mathbf{C}=2\mathbf{r}_2,\qquad a=2-\frac{2t}{T}$$
+
+Hunting with the three leaders:
+
+$$\mathbf{D}_\alpha=\left|\mathbf{C}_1\mathbf{X}_\alpha-\mathbf{X}\right|,\quad \mathbf{D}_\beta=\left|\mathbf{C}_2\mathbf{X}_\beta-\mathbf{X}\right|,\quad \mathbf{D}_\delta=\left|\mathbf{C}_3\mathbf{X}_\delta-\mathbf{X}\right|$$
+
+$$\mathbf{X}_1=\mathbf{X}_\alpha-\mathbf{A}_1\mathbf{D}_\alpha,\qquad \mathbf{X}_2=\mathbf{X}_\beta-\mathbf{A}_2\mathbf{D}_\beta,\qquad \mathbf{X}_3=\mathbf{X}_\delta-\mathbf{A}_3\mathbf{D}_\delta$$
+
+$$\mathbf{X}(t+1)=\frac{\mathbf{X}_1+\mathbf{X}_2+\mathbf{X}_3}{3}$$
+
+### Algorithm
+
+1. Initialise 100 wolves over bus index and DG capacity; evaluate each with the Fast-Decoupled load flow.
+2. Rank the pack and set $\alpha$, $\beta$, $\delta$.
+3. Update $a$ from 2 to 0; move every wolf with the equations above.
+4. Re-evaluate losses and voltage; repeat until the iteration cap.
+5. Report the $\alpha$ wolf as the optimal bus/capacity pair.
+
+Two scenarios are reported: loss reductions of 98.15% (real) and 98.95% (reactive) in the first, with an average voltage rise of 0.0127 p.u.; the second raises the average voltage by 0.0064 p.u.
+
 ## Contents
 
 ```
