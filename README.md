@@ -15,45 +15,67 @@ In electric power distribution systems, the distance between the load bus and th
 
 ## Proposed method
 
-Grey Wolf Optimizer (GWO) searches for the bus and capacity of one distributed generator on the IEEE 14-bus network. Each wolf encodes a candidate placement; the pack is led by the three best placements ($\alpha$, $\beta$, $\delta$), and the objective is network loss subject to the grid-code voltage band.
+Grey Wolf Optimizer (GWO) searches for the bus and capacity of one distributed generator on the IEEE 14-bus network. Each wolf encodes a candidate placement; the pack is led by the three best placements ($\alpha$, $\beta$, $\delta$), and the objective is network loss subject to the grid-code voltage band. The paper reports two scenarios, with loss reductions of 98.15% (real) and 98.95% (reactive) in the first.
 
 ### Problem formulation
 
-$$\min_{\text{bus},\,P_{DG}}\ P_{\text{loss}}=\sum_{k=1}^{N_l}I_k^2R_k=\sum_{i=1}^{N}\sum_{j=1}^{N}G_{ij}\left(V_i^2+V_j^2-2V_iV_j\cos(\theta_i-\theta_j)\right)$$
+The network loss is the sum of $I^2R$ over all branches, equivalently the double-sum expression in bus voltages and admittances:
 
-subject to
+$$\min_{\text{bus},\,P_{DG}}\ P_{\text{loss}}=\sum_{k=1}^{N_l}I_k^2R_k=\sum_{i=1}^{N}\sum_{j=1}^{N}G_{ij}\left(V_i^2+V_j^2-2V_iV_j\cos(\theta_i-\theta_j)\right).$$
 
-$$0.90\le V_i\le1.05\ \text{p.u.},\qquad P_{DG}\le0.20\,P_{\text{peak}},\qquad P_{DG}^{\min}\le P_{DG}\le P_{DG}^{\max}$$
+The constraints are the grid-code voltage band, the DG penetration cap and the DG size bounds:
 
-Voltage violations are penalised, so the implemented fitness is
+$$0.90\le V_i\le1.05\ \text{p.u.},\qquad P_{DG}\le0.20\,P_{\text{peak}},\qquad P_{DG}^{\min}\le P_{DG}\le P_{DG}^{\max}.$$
 
-$$f=\sum_kI_k^2R_k+M\sum_{i=1}^{N}\left[\max(0,V_i^{\min}-V_i)+\max(0,V_i-V_i^{\max})\right]^2$$
+### Notation
+
+| Symbol | Meaning | Unit |
+|---|---|---|
+| $N$ | number of buses | – |
+| $N_l$ | number of branches | – |
+| $V_i,\theta_i$ | voltage magnitude and angle at bus $i$ | p.u., rad |
+| $G_{ij}$ | real part of the bus admittance matrix | p.u. |
+| $I_k,R_k$ | current and resistance of branch $k$ | p.u., p.u. |
+| $P_{\text{loss}}$ | total active-power loss | MW |
+| $P_{DG}$ | DG capacity | MW |
+| $P_{\text{peak}}$ | peak system demand | MW |
+| $\mathbf{X}$ | wolf position (bus and capacity) | – |
+| $\mathbf{X}_\alpha,\mathbf{X}_\beta,\mathbf{X}_\delta$ | three best positions | – |
+| $\mathbf{A},\mathbf{C}$ | GWO coefficient vectors | – |
+| $a$ | encircling parameter, decreases from 2 to 0 | – |
+| $t,T$ | iteration and iteration cap | – |
 
 ### GWO equations
 
-Encircling:
+Encircling the prey:
 
-$$\mathbf{D}=\left|\mathbf{C}\odot\mathbf{X}_p(t)-\mathbf{X}(t)\right|,\qquad \mathbf{X}(t+1)=\mathbf{X}_p(t)-\mathbf{A}\odot\mathbf{D}$$
+$$\mathbf{D}=\left|\mathbf{C}\odot\mathbf{X}_p(t)-\mathbf{X}(t)\right|,\qquad \mathbf{X}(t+1)=\mathbf{X}_p(t)-\mathbf{A}\odot\mathbf{D},$$
 
-$$\mathbf{A}=2a\mathbf{r}_1-a,\qquad \mathbf{C}=2\mathbf{r}_2,\qquad a=2-\frac{2t}{T}$$
+$$\mathbf{A}=2a\mathbf{r}_1-a,\qquad \mathbf{C}=2\mathbf{r}_2,\qquad a=2-\frac{2t}{T}.$$
 
-Hunting with the three leaders:
+The vector $\mathbf{A}$ controls whether the wolf approaches or moves away from the prey, and $\mathbf{C}$ adds random weighting. As $a$ falls, the pack shifts from exploration to encirclement.
 
-$$\mathbf{D}_\alpha=\left|\mathbf{C}_1\mathbf{X}_\alpha-\mathbf{X}\right|,\quad \mathbf{D}_\beta=\left|\mathbf{C}_2\mathbf{X}_\beta-\mathbf{X}\right|,\quad \mathbf{D}_\delta=\left|\mathbf{C}_3\mathbf{X}_\delta-\mathbf{X}\right|$$
+Hunting uses the three leaders:
 
-$$\mathbf{X}_1=\mathbf{X}_\alpha-\mathbf{A}_1\mathbf{D}_\alpha,\qquad \mathbf{X}_2=\mathbf{X}_\beta-\mathbf{A}_2\mathbf{D}_\beta,\qquad \mathbf{X}_3=\mathbf{X}_\delta-\mathbf{A}_3\mathbf{D}_\delta$$
+$$\mathbf{D}_\alpha=\left|\mathbf{C}_1\mathbf{X}_\alpha-\mathbf{X}\right|,\quad \mathbf{D}_\beta=\left|\mathbf{C}_2\mathbf{X}_\beta-\mathbf{X}\right|,\quad \mathbf{D}_\delta=\left|\mathbf{C}_3\mathbf{X}_\delta-\mathbf{X}\right|,$$
 
-$$\mathbf{X}(t+1)=\frac{\mathbf{X}_1+\mathbf{X}_2+\mathbf{X}_3}{3}$$
+$$\mathbf{X}_1=\mathbf{X}_\alpha-\mathbf{A}_1\mathbf{D}_\alpha,\qquad \mathbf{X}_2=\mathbf{X}_\beta-\mathbf{A}_2\mathbf{D}_\beta,\qquad \mathbf{X}_3=\mathbf{X}_\delta-\mathbf{A}_3\mathbf{D}_\delta,$$
+
+$$\mathbf{X}(t+1)=\frac{\mathbf{X}_1+\mathbf{X}_2+\mathbf{X}_3}{3}.$$
+
+Averaging the three candidate moves keeps the pack near the best-known region while still allowing the $\beta$ and $\delta$ wolves to influence the direction.
 
 ### Algorithm
 
 1. Initialise 100 wolves over bus index and DG capacity; evaluate each with the Fast-Decoupled load flow.
 2. Rank the pack and set $\alpha$, $\beta$, $\delta$.
-3. Update $a$ from 2 to 0; move every wolf with the equations above.
+3. Update $a$ from 2 to 0 and move every wolf with the equations above.
 4. Re-evaluate losses and voltage; repeat until the iteration cap.
 5. Report the $\alpha$ wolf as the optimal bus/capacity pair.
 
-Two scenarios are reported: loss reductions of 98.15% (real) and 98.95% (reactive) in the first, with an average voltage rise of 0.0127 p.u.; the second raises the average voltage by 0.0064 p.u.
+### Implementation note
+
+The notebook evaluates a simplified loss proxy: line impedance is formed from resistance, reactance and susceptance, current is estimated with a flat $V=1.0$ p.u. assumption, and only the top three DG buses are kept. Voltage is not part of the notebook fitness, although the paper enforces the 0.90–1.05 p.u. band and reports voltage improvements. The load-flow results in the paper therefore come from the paper workflow, not from this notebook.
 
 ## Contents
 
