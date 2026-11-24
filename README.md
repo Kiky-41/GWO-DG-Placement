@@ -21,11 +21,11 @@ Grey Wolf Optimizer (GWO) searches for the bus and capacity of one distributed g
 
 The network loss is the sum of $I^2R$ over all branches, equivalently the double-sum expression in bus voltages and admittances:
 
-$$\min_{\text{bus},\,P_{DG}}\ P_{\text{loss}}=\sum_{k=1}^{N_l}I_k^2R_k=\sum_{i=1}^{N}\sum_{j=1}^{N}G_{ij}\left(V_i^2+V_j^2-2V_iV_j\cos(\theta_i-\theta_j)\right).$$
+$$\min_{\text{bus},~P_{DG}}~P_{\text{loss}}=\sum_{k=1}^{N_l}I_k^2R_k=\sum_{i=1}^{N}\sum_{j=1}^{N}G_{ij}\left(V_i^2+V_j^2-2V_iV_j\cos(\theta_i-\theta_j)\right).$$
 
 The constraints are the grid-code voltage band, the DG penetration cap and the DG size bounds:
 
-$$0.90\le V_i\le1.05\ \text{p.u.},\qquad P_{DG}\le0.20\,P_{\text{peak}},\qquad P_{DG}^{\min}\le P_{DG}\le P_{DG}^{\max}.$$
+$$0.90\le V_i\le1.05~\text{p.u.},\qquad P_{DG}\le0.20~P_{\text{peak}},\qquad P_{DG}^{\min}\le P_{DG}\le P_{DG}^{\max}.$$
 
 ### Notation
 
