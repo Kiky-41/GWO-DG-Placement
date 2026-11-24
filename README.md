@@ -108,33 +108,17 @@ Base losses are 25.3580 MW and 84.5010 MVAR, with bus 14 at 0.9151 p.u. and buse
 
 ### Scenario 1, maxiter 100, DG at buses 7, 8, 11, 14
 
-| Measure | Value |
-|---|---|
-| DG size at bus 7 | 224.13 kW |
-| DG size at bus 8 | 468.61 kW |
-| DG size at bus 11 | 360.23 kW |
-| DG size at bus 14 | 205.39 kW |
-| Losses after DG | 0.4700 MW / 0.8840 MVAR |
-| Active loss reduction | 98.1465% |
-| Reactive loss reduction | 98.9538% |
-| Average voltage change | +0.0127 p.u. |
-| Lowest bus voltage | 0.9693 p.u. at bus 12 |
+| Measure | DG size at bus 7 | DG size at bus 8 | DG size at bus 11 | DG size at bus 14 | Losses after DG | Active loss reduction | Reactive loss reduction | Average voltage change | Lowest bus voltage |
+|---|---|---|---|---|---|---|---|---|---|
+| Value | 224.13 kW | 468.61 kW | 360.23 kW | 205.39 kW | 0.4700 MW / 0.8840 MVAR | 98.1465% | 98.9538% | +0.0127 p.u. | 0.9693 p.u. at bus 12 |
 
 Four units totalling 1,258.36 kW cut active loss to 0.4700 MW and reactive loss to 0.8840 MVAR, removing 98.1465% and 98.9538%. Every bus ends at or above 0.9693 p.u. and the average voltage rises 0.0127 p.u., so the configuration satisfies the objective on both counts.
 
 ### Scenario 2, maxiter 50, DG at buses 1, 2, 8, 14
 
-| Measure | Value |
-|---|---|
-| DG size at bus 1 | 152.23 kW |
-| DG size at bus 2 | 293.88 kW |
-| DG size at bus 8 | 648.63 kW |
-| DG size at bus 14 | 174.18 kW |
-| Losses after DG | 1.3250 MW / 2.6520 MVAR |
-| Active loss reduction | 94.7748% |
-| Reactive loss reduction | 96.8616% |
-| Average voltage change | +0.0064 p.u. |
-| Lowest bus voltage | 0.9242 p.u. at bus 14 |
+| Measure | DG size at bus 1 | DG size at bus 2 | DG size at bus 8 | DG size at bus 14 | Losses after DG | Active loss reduction | Reactive loss reduction | Average voltage change | Lowest bus voltage |
+|---|---|---|---|---|---|---|---|---|---|
+| Value | 152.23 kW | 293.88 kW | 648.63 kW | 174.18 kW | 1.3250 MW / 2.6520 MVAR | 94.7748% | 96.8616% | +0.0064 p.u. | 0.9242 p.u. at bus 14 |
 
 The second mapping removes 94.7748% of active and 96.8616% of reactive loss and lifts average voltage 0.0064 p.u. Bus 14 stays the weak point at 0.9242 p.u., which is why the paper ranks this configuration below scenario 1 even though it meets the grid code.
 
